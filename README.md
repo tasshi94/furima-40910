@@ -32,15 +32,15 @@ Things you may want to cover:
 | encrypted_password   | string | null: false               |
 | family_name          | string | null: false               |
 | first_name           | string | null: false               |
-| family_name_furigana | string | null: false               |
-| first_name_furigana  | string | null: false               |
+| family_name_kana     | string | null: false               |
+| first_name_kana      | string | null: false               |
 | birth                | date   | null: false               |
 
 
 ### Association
 
 - has_many :items
-- has_many :gets
+- has_many :orders
 
 ## items テーブル
 
@@ -60,9 +60,9 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one :get
+- has_one :order
 
-## gets テーブル
+## orders テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -86,9 +86,9 @@ Things you may want to cover:
 | street           | string     | null: false                       |
 | building_name    | string     |                                   |
 | phone_number     | string     | null: false                       |
-| get              | references | null: false, foreign_key: true    |
+| order            | references | null: false, foreign_key: true    |
 
 
 ### Association
 
-- belongs_to :get
+- belongs_to :order
