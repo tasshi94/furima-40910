@@ -48,22 +48,22 @@ RSpec.describe User, type: :model do
     it 'passwordが英字のみの場合登録できない' do
       @user.password = 'pppppp'
       @user.valid?
-      expect(@user.errors.full_messages).to include "Password 英字と数字の両方を含めて設定してください"
+      expect(@user.errors.full_messages).to include 'Password 英字と数字の両方を含めて設定してください'
     end
     it 'passwordが数字のみの場合登録できない' do
       @user.password = '123456'
       @user.valid?
-      expect(@user.errors.full_messages).to include "Password 英字と数字の両方を含めて設定してください"
+      expect(@user.errors.full_messages).to include 'Password 英字と数字の両方を含めて設定してください'
     end
     it '姓が空では登録できない' do
       @user.family_name = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include "Family name can't be blank", "Family name 全角文字（漢字・ひらがな・カタカナ）を使用してください"
+      expect(@user.errors.full_messages).to include "Family name can't be blank", 'Family name 全角文字（漢字・ひらがな・カタカナ）を使用してください'
     end
     it '名が空では登録できない' do
       @user.first_name = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include "First name can't be blank", "First name 全角文字（漢字・ひらがな・カタカナ）を使用してください"
+      expect(@user.errors.full_messages).to include "First name can't be blank", 'First name 全角文字（漢字・ひらがな・カタカナ）を使用してください'
     end
     it '姓（カナ）が空では登録できない' do
       @user.family_name_kana = ''
@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
     it '姓（カナ）がカタカナ以外では登録できない' do
       @user.family_name_kana = '山田'
       @user.valid?
-      expect(@user.errors.full_messages).to include "Family name kana 全角文字（カタカナ）を使用してください"
+      expect(@user.errors.full_messages).to include 'Family name kana 全角文字（カタカナ）を使用してください'
     end
 
     it '名（カナ）が空では登録できない' do
@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
     it '名（カナ）がカタカナ以外では登録できない' do
       @user.first_name_kana = '太郎'
       @user.valid?
-      expect(@user.errors.full_messages).to include "First name kana 全角文字（カタカナ）を使用してください"
+      expect(@user.errors.full_messages).to include 'First name kana 全角文字（カタカナ）を使用してください'
     end
     it '生年月日が空では登録できない' do
       @user.birth = ''
