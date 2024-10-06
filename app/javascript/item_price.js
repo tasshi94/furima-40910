@@ -6,7 +6,6 @@ const addProfitDom = document.getElementById("profit");
 
 priceInput.addEventListener("input", () => {
   const inputValue = parseFloat(priceInput.value);
-  console.log(inputValue);
 
   const taxAmount = Math.floor(inputValue * 0.1);
   const profitAmount = Math.floor(inputValue - taxAmount);
