@@ -102,7 +102,7 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいていない場合登録できない' do
         @item.user = nil
         expect(@item).to_not be_valid
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
