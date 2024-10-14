@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_04_215713) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_14_040522) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_215713) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "destinations", charset: "utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "shipping_from_id", null: false
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.bigint "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_destinations_on_order_id"
+  end
+
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "item_name", null: false
     t.text "explanation", null: false
@@ -62,6 +75,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_215713) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "shipping_days", charset: "utf8", force: :cascade do |t|
@@ -99,5 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_215713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "destinations", "orders"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
 end
