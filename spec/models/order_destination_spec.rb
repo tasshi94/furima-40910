@@ -9,7 +9,7 @@ RSpec.describe OrderDestination, type: :model do
   describe '配送先情報の保存' do
 
     context '内容に問題ない場合' do
-      it 'すべての値が正しく入力されていれば保存できること' do
+      it 'すべての値が正しく入力されtokenが存在すれば保存できること' do
         expect(@order_destination).to be_valid
       end
       it 'building_nameは空でも保存できること' do
@@ -19,6 +19,11 @@ RSpec.describe OrderDestination, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it "tokenが空では登録できないこと" do
+        @order_destination.token = nil
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("Token can't be blank")
+      end
       it 'post_codeが空だと保存できないこと' do
         @order_destination.post_code = ''
         @order_destination.valid?
