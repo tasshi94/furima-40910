@@ -7,7 +7,6 @@ RSpec.describe OrderDestination, type: :model do
     @order_destination = FactoryBot.build(:order_destination, user_id: @user.id, item_id: @item.id)
   end
   describe '配送先情報の保存' do
-
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されtokenが存在すれば保存できること' do
         expect(@order_destination).to be_valid
@@ -19,7 +18,7 @@ RSpec.describe OrderDestination, type: :model do
     end
 
     context '内容に問題がある場合' do
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_destination.token = nil
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include("Token can't be blank")
@@ -57,12 +56,12 @@ RSpec.describe OrderDestination, type: :model do
       it 'phone_numberが10桁未満保存できないこと' do
         @order_destination.phone_number = '123456789'
         @order_destination.valid?
-        expect(@order_destination.errors.full_messages).to include("Phone number is too short")
+        expect(@order_destination.errors.full_messages).to include('Phone number is too short')
       end
       it 'phone_numberが半角数値以外だと保存できないこと' do
         @order_destination.phone_number = '123-456-7890'
         @order_destination.valid?
-        expect(@order_destination.errors.full_messages).to include("Phone number is invalid. Input only numbers")
+        expect(@order_destination.errors.full_messages).to include('Phone number is invalid. Input only numbers')
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_destination.user_id = nil
