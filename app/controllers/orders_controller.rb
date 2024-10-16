@@ -3,10 +3,9 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-
-    return redirect_to root_path if @item.order.present? && current_user != @item.user
-
-    return redirect_to root_path if current_user == @item.user
+    if user_cannot_purchase?
+      return redirect_to root_path
+    end
 
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_destination = OrderDestination.new
@@ -34,6 +33,10 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def user_cannot_purchase?
+    current_user == @item.user || @item.order.present?
   end
 
   def pay_item
